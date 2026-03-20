@@ -97,3 +97,21 @@ InitTestScene*.unity*
 
 # Auto-generated scenes by play mode tests
 /[Aa]ssets/[Ii]nit[Tt]est[Ss]cene*.unity*
+
+# Visual Studio Code
+.vscode/
+*.csproj
+*.sln
+*.user
+*.userprefs
+*.pidb
+*.suo
+
+# Build outputs
+*.apk
+*.aab
+*.unitypackage
+*.app
+
+# Crash reports
+sysinfo.txt
