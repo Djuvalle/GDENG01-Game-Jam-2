@@ -1,44 +1,13 @@
 namespace GameEnum
 {
-    public enum ActionEvent
+    public enum Notifications
     {
-        IngredientAdded,
-        Interacted,
-        CustomerServed,
-        UpdateView
+        PlayerPositionChanged,
     }
     public enum ParameterKey
     {
-        IngredientType,
-    }
-    public enum IngredientType
-    {
-        Flour,
-        Egg,
-        Batter,
-        Butter
-    }
-    public enum FoodType
-    {
-        Pancake,
-        ButteredPancake
-    }
-    public enum FoodState
-    {
-        Raw,
-        Cooked,
-        Burnt
-    }
-    public enum CustomerState
-    {
-        Cooldown,
-        Idle,
-        Order,
-        Leave,
-    }
-    public enum OrderState
-    {
-        Success,
-        Failure
+        X,
+        Y,
+        Z,
     }
 }
