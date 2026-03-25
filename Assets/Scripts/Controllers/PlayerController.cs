@@ -3,6 +3,7 @@ using UnityEngine.InputSystem;
 using GameEnum;
 
 [RequireComponent(typeof(Rigidbody))]
+[RequireComponent(typeof(Transform))]
 public class PlayerController : MonoBehaviour
 {
     private static Vector3 CAMERA_OFFSET = new Vector3(0, 1, 0);
