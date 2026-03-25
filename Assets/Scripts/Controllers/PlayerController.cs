@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
+using GameEnum;
 
 [RequireComponent(typeof(Rigidbody))]
 public class PlayerController : MonoBehaviour
@@ -9,12 +10,25 @@ public class PlayerController : MonoBehaviour
     private float speed;
     private Camera cam;
     private Rigidbody rb;
+    private Transform transform;
     private Vector2 moveInput;
 
+    private void FirePlayerPositionChanged()
+    {
+        Vector3 pos = this.transform.position;
+
+        Parameters param = new Parameters();
+        param.PutExtra(ParameterKey.X.ToString(), pos.x);
+        param.PutExtra(ParameterKey.Y.ToString(), pos.y);
+        param.PutExtra(ParameterKey.Z.ToString(), pos.z);
+
+        EventBroadcaster.Instance.PostEvent(Notifications.PlayerPositionChanged.ToString(), param);
+    }
 
     private void Start()
     {
         this.rb = GetComponent<Rigidbody>();
+        this.transform = GetComponent<Transform>();
         this.cam = Camera.main;
         this.cam.transform.localPosition = CAMERA_OFFSET;
     }
@@ -24,7 +38,7 @@ public class PlayerController : MonoBehaviour
         Vector3 move = cam.transform.forward * moveInput.y + cam.transform.right * moveInput.x;
         move.y = 0;
         rb.AddForce(move.normalized * speed, ForceMode.VelocityChange);
-
+        this.FirePlayerPositionChanged();
     }
 
     void OnMove(InputValue value)
