@@ -3,7 +3,6 @@ using UnityEngine.InputSystem;
 using GameEnum;
 
 [RequireComponent(typeof(Rigidbody))]
-[RequireComponent(typeof(Transform))]
 public class PlayerController : MonoBehaviour
 {
     private static Vector3 CAMERA_OFFSET = new Vector3(0, 1, 0);
@@ -11,7 +10,6 @@ public class PlayerController : MonoBehaviour
     private float speed;
     private Camera cam;
     private Rigidbody rb;
-    private Transform transform;
     private Vector2 moveInput;
 
     private void FirePlayerPositionChanged()
@@ -29,7 +27,6 @@ public class PlayerController : MonoBehaviour
     private void Start()
     {
         this.rb = GetComponent<Rigidbody>();
-        this.transform = GetComponent<Transform>();
         this.cam = Camera.main;
         this.cam.transform.localPosition = CAMERA_OFFSET;
     }
