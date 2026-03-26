@@ -10,13 +10,13 @@ public class RoadManager : MonoBehaviour
     private const float SLOW_DESTROY_TIME = 5;
     private const float MAX__SLOW_DESTROY_SIZE = 10;
     
-    
     private static GameObject RoadContainer;
-    private static GameObject[] RoadPrefabs;
+    private static Dictionary<RoadDirection, GameObject[]> RoadPrefabs = new Dictionary<RoadDirection, GameObject[]>();
     private static Queue<GameObject> SpawnedRoadQueue = new Queue<GameObject>();
     private static Vector3 PlayerPosition = Vector3.zero;
     [SerializeField] private GameObject StartingRoad;
     private GameObject PrevEndObj;
+    private int CurrentAxisDirection = 0;
 
     private void PostEventWaypoint(GameObject prevEndObj)
     {
@@ -32,19 +32,25 @@ public class RoadManager : MonoBehaviour
     private void TryGeneration()
     {
         Vector3 diff = PrevEndObj.transform.position - PlayerPosition;
-        if (diff.magnitude <= MIN_SPAWN_RANGE)
-        {
-            GameObject newRoad = Instantiate(
-                RoadPrefabs[Random.Range(0, RoadPrefabs.Length - 1)],
-                this.PrevEndObj.transform.position,
-                this.PrevEndObj.transform.rotation,
-                RoadContainer.transform
-            );
-            this.PrevEndObj = newRoad.transform.Find("EndPoint").gameObject;
-            SpawnedRoadQueue.Enqueue(newRoad);
+        if (diff.magnitude > MIN_SPAWN_RANGE)
+            return;
 
-            //TODO: Broadcast new Road added and add old Road removal
-        }
+        RoadDirection targetDir = RollTargetDirection();
+        int idx = Random.Range(0, RoadPrefabs[targetDir].Length);
+        Debug.Log($"Target Dir: {targetDir} Current Axis: {this.CurrentAxisDirection}");
+
+        GameObject newRoad = Instantiate(
+            RoadPrefabs[targetDir][idx],
+            this.PrevEndObj.transform.position,
+            this.PrevEndObj.transform.rotation,
+            RoadContainer.transform
+        );
+        GameObject endPoint = newRoad.transform.Find("EndPoint").gameObject;
+
+        this.PrevEndObj = endPoint;
+        SpawnedRoadQueue.Enqueue(newRoad);
+
+        // TODO: Broadcast new Road added and add old Road removal
     }
     private void HandlePlayerPositionChanged(Parameters parameters)
     {
@@ -90,8 +96,14 @@ public class RoadManager : MonoBehaviour
     {   
         const string ROAD_PATH = "Prefabs/Road/";
         RoadContainer = GameObject.Find("RoadContainer");
-        RoadPrefabs = Resources.LoadAll<GameObject>(ROAD_PATH);
-        Debug.Log($"Number of Road prefabs found: {RoadPrefabs.Length}");
+        RoadPrefabs.Add(RoadDirection.Straight, Resources.LoadAll<GameObject>($"{ROAD_PATH}{RoadDirection.Straight.ToString()}/"));
+        RoadPrefabs.Add(RoadDirection.Right, Resources.LoadAll<GameObject>($"{ROAD_PATH}{RoadDirection.Right.ToString()}/"));
+        RoadPrefabs.Add(RoadDirection.Left, Resources.LoadAll<GameObject>($"{ROAD_PATH}{RoadDirection.Left.ToString()}/"));
+        Debug.Log("Number of Road prefabs found\n" +
+            $"Straight: {RoadPrefabs[RoadDirection.Straight].Length}\n" +
+            $"Right: {RoadPrefabs[RoadDirection.Right].Length}\n" + 
+            $"Left: {RoadPrefabs[RoadDirection.Left].Length}"
+        );
 
         this.PrevEndObj = StartingRoad.transform.Find("EndPoint").gameObject;
         SpawnedRoadQueue.Enqueue(StartingRoad);
