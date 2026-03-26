@@ -7,6 +7,7 @@ public class Car : MonoBehaviour
     private const float STEERING_DAMPING = 120f; // Degrees per second
     [SerializeField] private float MaxSpeed = 30;
     [SerializeField] private float Acceleration = 2000f;
+    [SerializeField] private float BrakeForce = 3000f;
     [SerializeField] private float SteerSpeed = 35;
     [SerializeField] private WheelCollider[] Wheels = new WheelCollider[4]; // Assumption: First two wheels are front wheels
     
