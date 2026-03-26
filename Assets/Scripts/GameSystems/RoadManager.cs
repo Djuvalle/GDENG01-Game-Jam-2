@@ -29,6 +29,32 @@ public class RoadManager : MonoBehaviour
 
         EventBroadcaster.Instance.PostEvent(Notifications.WaypointAdded.ToString(), param);
     }
+    private RoadDirection RollTargetDirection()
+    {
+        switch(Random.Range((int) -1, (int) 2))
+        {
+            case -1:
+                if (CurrentAxisDirection == -1)
+                    return RoadDirection.Straight;
+                else
+                {
+                    CurrentAxisDirection--;
+                    return RoadDirection.Left;
+                }
+            case 1:
+                if (CurrentAxisDirection == 1)
+                    return RoadDirection.Straight;
+                else
+                {
+                    CurrentAxisDirection++;
+                    return RoadDirection.Right;
+                }
+                    
+            case 0:
+            default:
+                return RoadDirection.Straight;
+        }
+    }
     private void TryGeneration()
     {
         Vector3 diff = PrevEndObj.transform.position - PlayerPosition;
