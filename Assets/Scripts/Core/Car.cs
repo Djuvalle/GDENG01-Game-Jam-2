@@ -57,10 +57,11 @@ public class Car : MonoBehaviour
         float motorTorque = 0;
         float brakeTorque = 0;
 
-        bool isReversingWhileInDrive = (forwardSpeed > 0.5f && moveInput.y < 0);
-        bool isInDriveWhileReversing = (forwardSpeed < 0.5f && moveInput.y > 0);
+        bool isReversingWhileInDrive = forwardSpeed > 0.5f && moveInput.y < 0;
+        bool isInDriveWhileReversing = forwardSpeed < -0.5f && moveInput.y > 0;
+        bool isBraking = isReversingWhileInDrive || isInDriveWhileReversing;
 
-        if (isReversingWhileInDrive || isInDriveWhileReversing)
+        if (isBraking)
             brakeTorque = BrakeForce;
         else if (moveInput.y == 0)
             brakeTorque = BrakeForce * 0.1f;
@@ -84,5 +85,6 @@ public class Car : MonoBehaviour
     void OnMove(InputValue value)
     {
         this.moveInput = value.Get<Vector2>();
+        Debug.Log($"Moved: {moveInput.ToString()}");
     }
 }
