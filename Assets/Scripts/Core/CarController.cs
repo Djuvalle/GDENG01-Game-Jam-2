@@ -46,7 +46,7 @@ public class CarController : MonoBehaviour
         this.rb = GetComponent<Rigidbody>();
         foreach(WheelCollider wheel in Wheels)
         {
-            wheel.gameObject.AddComponent<Wheel>();
+            wheel.gameObject.AddComponent<WheelController>();
         }
     }
     
