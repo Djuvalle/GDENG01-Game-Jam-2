@@ -3,7 +3,7 @@ using GameEnum;
 using System.Collections.Generic;
 using System.Collections;
 
-public class TerrainGenerator : MonoBehaviour
+public class RoadManager : MonoBehaviour
 {
     private const float MIN_SPAWN_RANGE = 50;
     private const float DESTROY_START_DELAY = 5f;
@@ -11,11 +11,11 @@ public class TerrainGenerator : MonoBehaviour
     private const float MAX__SLOW_DESTROY_SIZE = 10;
     
     
-    private static GameObject TerrainContainer;
-    private static GameObject[] TerrainPrefabs;
-    private static Queue<GameObject> SpawnedTerrainQueue = new Queue<GameObject>();
+    private static GameObject RoadContainer;
+    private static GameObject[] RoadPrefabs;
+    private static Queue<GameObject> SpawnedRoadQueue = new Queue<GameObject>();
     private static Vector3 PlayerPosition = Vector3.zero;
-    [SerializeField] private GameObject StartingTerrain;
+    [SerializeField] private GameObject StartingRoad;
     private GameObject PrevEndObj;
 
     private void PostEventWaypoint(GameObject prevEndObj)
@@ -34,16 +34,16 @@ public class TerrainGenerator : MonoBehaviour
         Vector3 diff = PrevEndObj.transform.position - PlayerPosition;
         if (diff.magnitude <= MIN_SPAWN_RANGE)
         {
-            GameObject newTerrain = Instantiate(
-                TerrainPrefabs[Random.Range(0, TerrainPrefabs.Length - 1)],
+            GameObject newRoad = Instantiate(
+                RoadPrefabs[Random.Range(0, RoadPrefabs.Length - 1)],
                 this.PrevEndObj.transform.position,
                 this.PrevEndObj.transform.rotation,
-                TerrainContainer.transform
+                RoadContainer.transform
             );
-            this.PrevEndObj = newTerrain.transform.Find("EndPoint").gameObject;
-            SpawnedTerrainQueue.Enqueue(newTerrain);
+            this.PrevEndObj = newRoad.transform.Find("EndPoint").gameObject;
+            SpawnedRoadQueue.Enqueue(newRoad);
 
-            //TODO: Broadcast new terrain added and add old terrain removal
+            //TODO: Broadcast new Road added and add old Road removal
         }
     }
     private void HandlePlayerPositionChanged(Parameters parameters)
@@ -57,47 +57,47 @@ public class TerrainGenerator : MonoBehaviour
         this.TryGeneration();
     }
 
-    IEnumerator HandleTerrainDestruction()
+    IEnumerator HandleRoadDestruction()
     {
         yield return new WaitForSeconds(DESTROY_START_DELAY);
         Debug.Log("Destroy loop started");
 
         while (true)
         {
-            if (SpawnedTerrainQueue.Count == 0)
-                yield return new WaitUntil(() => SpawnedTerrainQueue.Count > 0);
+            if (SpawnedRoadQueue.Count == 0)
+                yield return new WaitUntil(() => SpawnedRoadQueue.Count > 0);
                 
-            GameObject terrain = SpawnedTerrainQueue.Dequeue();
+            GameObject road = SpawnedRoadQueue.Dequeue();
 
             // Additional code here
 
-            if (SpawnedTerrainQueue.Count >= MAX__SLOW_DESTROY_SIZE)
+            if (SpawnedRoadQueue.Count >= MAX__SLOW_DESTROY_SIZE)
             {
-                Debug.Log("Quick destroy terrain");
+                Debug.Log("Quick destroy road");
                 yield return null;
             } else {
-                Debug.Log("Slow destroy terrain");
+                Debug.Log("Slow destroy road");
                 yield return new WaitForSeconds(SLOW_DESTROY_TIME);
             }
                 
             
-            if (terrain != null)
-                Destroy(terrain);
+            if (road != null)
+                Destroy(road);
         }
     }
 
     private void Start()
     {   
-        const string TERRAIN_PATH = "Prefabs/Terrain/";
-        TerrainContainer = GameObject.Find("TerrainContainer");
-        TerrainPrefabs = Resources.LoadAll<GameObject>(TERRAIN_PATH);
-        Debug.Log($"Number of terrain prefabs found: {TerrainPrefabs.Length}");
+        const string ROAD_PATH = "Prefabs/Road/";
+        RoadContainer = GameObject.Find("RoadContainer");
+        RoadPrefabs = Resources.LoadAll<GameObject>(ROAD_PATH);
+        Debug.Log($"Number of Road prefabs found: {RoadPrefabs.Length}");
 
-        this.PrevEndObj = StartingTerrain.transform.Find("EndPoint").gameObject;
-        SpawnedTerrainQueue.Enqueue(StartingTerrain);
+        this.PrevEndObj = StartingRoad.transform.Find("EndPoint").gameObject;
+        SpawnedRoadQueue.Enqueue(StartingRoad);
         //this.PostEventWaypoint(PrevEndObj);
 
         EventBroadcaster.Instance.AddObserver(Notifications.PlayerPositionChanged.ToString(), this.HandlePlayerPositionChanged);
-        StartCoroutine(HandleTerrainDestruction());
+        StartCoroutine(HandleRoadDestruction());
     }
 }
