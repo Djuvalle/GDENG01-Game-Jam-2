@@ -100,22 +100,22 @@ public class RoadManager : MonoBehaviour
             if (SpawnedRoadQueue.Count == 0)
                 yield return new WaitUntil(() => SpawnedRoadQueue.Count > 0);
                 
-            GameObject road = SpawnedRoadQueue.Dequeue();
+            GameObject oldRoad = SpawnedRoadQueue.Dequeue();
 
             // Additional code here
 
             if (SpawnedRoadQueue.Count >= MAX__SLOW_DESTROY_SIZE)
             {
-                Debug.Log("Quick destroy road");
+                Debug.Log("Quick destroy old road");
                 yield return null;
             } else {
-                Debug.Log("Slow destroy road");
+                Debug.Log("Slow destroy old road");
                 yield return new WaitForSeconds(SLOW_DESTROY_TIME);
             }
                 
             
-            if (road != null)
-                Destroy(road);
+            if (oldRoad != null)
+                Destroy(oldRoad);
         }
     }
 
