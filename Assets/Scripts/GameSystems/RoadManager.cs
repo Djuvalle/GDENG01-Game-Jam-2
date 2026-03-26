@@ -5,7 +5,7 @@ using System.Collections;
 
 public class RoadManager : MonoBehaviour
 {
-    private const float MIN_SPAWN_RANGE = 50;
+    private const float MIN_SPAWN_RANGE = 200;
     private const float DESTROY_START_DELAY = 5f;
     private const float SLOW_DESTROY_TIME = 5;
     private const float MAX__SLOW_DESTROY_DIST = 100;
