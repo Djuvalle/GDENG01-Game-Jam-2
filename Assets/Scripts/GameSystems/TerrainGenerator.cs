@@ -8,7 +8,8 @@ public class TerrainGenerator : MonoBehaviour
     private static GameObject TerrainContainer;
     private static GameObject[] TerrainPrefabs;
     private static Vector3 PlayerPosition = Vector3.zero;
-    [SerializeField] private GameObject PrevEndObj;
+    [SerializeField] private GameObject StartingTerrain;
+    private GameObject PrevEndObj;
 
     private void PostEventWaypoint(GameObject prevEndObj)
     {
@@ -51,8 +52,11 @@ public class TerrainGenerator : MonoBehaviour
     {   
         TerrainContainer = GameObject.Find("TerrainContainer");
         TerrainPrefabs = Resources.LoadAll<GameObject>(TERRAIN_PATH);
-        this.PostEventWaypoint(PrevEndObj);
-        EventBroadcaster.Instance.AddObserver(Notifications.PlayerPositionChanged.ToString(), this.HandlePlayerPositionChanged);
         Debug.Log($"Number of terrain prefabs found: {TerrainPrefabs.Length}");
+
+        this.PrevEndObj = StartingTerrain.transform.Find("EndPoint").gameObject;
+        //this.PostEventWaypoint(PrevEndObj);
+
+        EventBroadcaster.Instance.AddObserver(Notifications.PlayerPositionChanged.ToString(), this.HandlePlayerPositionChanged);
     }
 }
