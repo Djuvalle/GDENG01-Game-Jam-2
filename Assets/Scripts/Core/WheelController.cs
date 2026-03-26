@@ -3,7 +3,7 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class Wheel : MonoBehaviour
+public class WheelController : MonoBehaviour
 {
     private WheelCollider WheelCollider;
     private Transform WheelModel;
