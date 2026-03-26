@@ -101,10 +101,10 @@ public class RoadManager : MonoBehaviour
                 yield return new WaitUntil(() => SpawnedRoadQueue.Count > 0);
                 
             GameObject oldRoad = SpawnedRoadQueue.Dequeue();
+            GameObject oldEndPoint = oldRoad.transform.Find(END_POINT).gameObject;
 
             // Additional code here
-
-            if (SpawnedRoadQueue.Count >= MAX__SLOW_DESTROY_SIZE)
+            if ((oldEndPoint.transform.position - PlayerPosition).magnitude > MAX__SLOW_DESTROY_DIST)
             {
                 Debug.Log("Quick destroy old road");
                 yield return null;
