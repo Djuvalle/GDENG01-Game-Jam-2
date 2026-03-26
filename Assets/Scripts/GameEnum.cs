@@ -12,4 +12,10 @@ namespace GameEnum
         Y,
         Z,
     }
+    public enum RoadDirection
+    {
+        Straight,
+        Right,
+        Left
+    }
 }
