@@ -130,7 +130,7 @@ GameObject:
   - component: {fileID: 112606}
   - component: {fileID: 112607}
   m_Layer: 0
-  m_Name: TerrainGenerator
+  m_Name: RoadManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -163,7 +163,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 64b5ea70be6b8274e8ab7355eb26d6c3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::TerrainGenerator
-  StartingTerrain: {fileID: 1804485308}
+  StartingRoad: {fileID: 1804485308}
 --- !u!1 &682132086
 GameObject:
   m_ObjectHideFlags: 0
@@ -845,7 +845,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1684496529}
   m_Layer: 0
-  m_Name: TerrainContainer
+  m_Name: RoadContainer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
