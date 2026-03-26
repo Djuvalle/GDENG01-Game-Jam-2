@@ -9,6 +9,7 @@ public class RoadManager : MonoBehaviour
     private const float DESTROY_START_DELAY = 5f;
     private const float SLOW_DESTROY_TIME = 5;
     private const float MAX__SLOW_DESTROY_SIZE = 10;
+    private const string END_POINT = "EndPoint";
     
     private static GameObject RoadContainer;
     private static Dictionary<RoadDirection, GameObject[]> RoadPrefabs = new Dictionary<RoadDirection, GameObject[]>();
@@ -71,7 +72,7 @@ public class RoadManager : MonoBehaviour
             this.PrevEndObj.transform.rotation,
             RoadContainer.transform
         );
-        GameObject endPoint = newRoad.transform.Find("EndPoint").gameObject;
+        GameObject endPoint = newRoad.transform.Find(END_POINT).gameObject;
 
         this.PrevEndObj = endPoint;
         SpawnedRoadQueue.Enqueue(newRoad);
@@ -131,7 +132,7 @@ public class RoadManager : MonoBehaviour
             $"Left: {RoadPrefabs[RoadDirection.Left].Length}"
         );
 
-        this.PrevEndObj = StartingRoad.transform.Find("EndPoint").gameObject;
+        this.PrevEndObj = StartingRoad.transform.Find(END_POINT).gameObject;
         SpawnedRoadQueue.Enqueue(StartingRoad);
         //this.PostEventWaypoint(PrevEndObj);
 
