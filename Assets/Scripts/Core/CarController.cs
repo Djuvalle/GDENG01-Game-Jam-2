@@ -2,7 +2,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using GameEnum;
 
-public class Car : MonoBehaviour
+public class CarController : MonoBehaviour
 {
     private const float STEERING_DAMPING = 120f; // Degrees per second
     [SerializeField] private float MaxSpeed = 30;
