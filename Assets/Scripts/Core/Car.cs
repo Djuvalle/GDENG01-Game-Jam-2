@@ -14,6 +14,7 @@ public class Car : MonoBehaviour
     private Rigidbody rb;
     private Vector2 moveInput;
     private float currentSteerAngle = 0f;
+    private bool IsOutOfBounds = false;
 
     private void Start()
     {
