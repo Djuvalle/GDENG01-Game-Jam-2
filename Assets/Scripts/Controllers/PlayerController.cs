@@ -11,17 +11,30 @@ public class PlayerController : MonoBehaviour
     private Camera cam;
     private Rigidbody rb;
     private Vector2 moveInput;
+    private bool IsOutOfBounds = false;
 
     private void FirePlayerPositionChanged()
     {
+        if (IsOutOfBounds)
+            return;
+        
         Vector3 pos = this.transform.position;
 
-        Parameters param = new Parameters();
-        param.PutExtra(ParameterKey.X.ToString(), pos.x);
-        param.PutExtra(ParameterKey.Y.ToString(), pos.y);
-        param.PutExtra(ParameterKey.Z.ToString(), pos.z);
+        // If player fell off the map
+        if (pos.y <= -5)
+        {
+            IsOutOfBounds = true;
+            Debug.Log("Player fell off the map");
+            EventBroadcaster.Instance.PostEvent(Notifications.PlayerDied.ToString());
+        } else {
+            Parameters param = new Parameters();
+            param.PutExtra(ParameterKey.X.ToString(), pos.x);
+            param.PutExtra(ParameterKey.Y.ToString(), pos.y);
+            param.PutExtra(ParameterKey.Z.ToString(), pos.z);
 
-        EventBroadcaster.Instance.PostEvent(Notifications.PlayerPositionChanged.ToString(), param);
+            EventBroadcaster.Instance.PostEvent(Notifications.PlayerPositionChanged.ToString(), param);
+        }
+        
     }
 
     private void Start()
