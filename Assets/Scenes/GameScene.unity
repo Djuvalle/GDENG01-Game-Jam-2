@@ -163,7 +163,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 64b5ea70be6b8274e8ab7355eb26d6c3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::TerrainGenerator
-  PrevEndObj: {fileID: 1767180390}
+  StartingTerrain: {fileID: 1804485308}
 --- !u!1 &682132086
 GameObject:
   m_ObjectHideFlags: 0
@@ -868,9 +868,9 @@ Transform:
   - {fileID: 739738958}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &1767180390 stripped
+--- !u!1 &1804485308 stripped
 GameObject:
-  m_CorrespondingSourceObject: {fileID: 9128906342891091185, guid: 6d8e61535eecfe04692b3176aef3aee2, type: 3}
+  m_CorrespondingSourceObject: {fileID: 3102671761235171321, guid: 6d8e61535eecfe04692b3176aef3aee2, type: 3}
   m_PrefabInstance: {fileID: 3523059395367418058}
   m_PrefabAsset: {fileID: 0}
 --- !u!4 &1804485309 stripped
