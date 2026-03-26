@@ -16,6 +16,31 @@ public class Car : MonoBehaviour
     private float currentSteerAngle = 0f;
     private bool IsOutOfBounds = false;
 
+    private void FirePlayerPositionChanged()
+    {
+        if (IsOutOfBounds)
+            return;
+        
+        Vector3 pos = this.transform.position;
+
+        // If player fell off the map
+        if (pos.y <= -5)
+        {
+            IsOutOfBounds = true;
+            Debug.Log("Player fell off the map");
+            EventBroadcaster.Instance.PostEvent(Notifications.PlayerDied.ToString());
+        } else {
+            Parameters param = new Parameters();
+            param.PutExtra(ParameterKey.X.ToString(), pos.x);
+            param.PutExtra(ParameterKey.Y.ToString(), pos.y);
+            param.PutExtra(ParameterKey.Z.ToString(), pos.z);
+
+            EventBroadcaster.Instance.PostEvent(Notifications.PlayerPositionChanged.ToString(), param);
+        }
+        
+    }
+
+
     private void Start()
     {
         this.rb = GetComponent<Rigidbody>();
