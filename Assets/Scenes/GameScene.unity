@@ -565,7 +565,6 @@ GameObject:
   - component: {fileID: 713371856}
   - component: {fileID: 713371855}
   - component: {fileID: 713371854}
-  - component: {fileID: 713371853}
   - component: {fileID: 713371852}
   m_Layer: 7
   m_Name: VehicleContainer
@@ -604,19 +603,6 @@ MonoBehaviour:
   m_DefaultActionMap: Default
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
---- !u!114 &713371853
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 713371851}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5419601b4379a294e9285ff93bdab62f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::PlayerController
-  speed: 0
 --- !u!114 &713371854
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -631,6 +617,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Car
   MaxSpeed: 30
   Acceleration: 2000
+  BrakeForce: 3000
   SteerSpeed: 35
   Wheels:
   - {fileID: 303504897}
