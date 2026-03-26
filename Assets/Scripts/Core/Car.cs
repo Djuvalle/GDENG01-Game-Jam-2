@@ -1,6 +1,6 @@
-using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using GameEnum;
 
 public class Car : MonoBehaviour
 {
@@ -49,32 +49,36 @@ public class Car : MonoBehaviour
             wheel.gameObject.AddComponent<Wheel>();
         }
     }
-
+    
     private void FixedUpdate()
     {
-        // Vector3 move = driveSpeed * moveInput.y + cam.transform.right * moveInput.x;
-        // this.FirePlayerPositionChanged();
         float forwardSpeed = Vector3.Dot(rb.linearVelocity, transform.forward);
 
         float motorTorque = 0;
-        
-        bool isBelowMaxSpeed = moveInput.y != 0 && (
-            (moveInput.y > 0 && forwardSpeed < MaxSpeed) ||
-            (moveInput.y < 0 && forwardSpeed > -MaxSpeed)
-        );
+        float brakeTorque = 0;
 
-        if (isBelowMaxSpeed)
-        {
+        bool isReversingWhileInDrive = (forwardSpeed > 0.5f && moveInput.y < 0);
+        bool isInDriveWhileReversing = (forwardSpeed < 0.5f && moveInput.y > 0);
+
+        if (isReversingWhileInDrive || isInDriveWhileReversing)
+            brakeTorque = BrakeForce;
+        else if (moveInput.y == 0)
+            brakeTorque = BrakeForce * 0.1f;
+        else if (Mathf.Abs(forwardSpeed) < MaxSpeed)
             motorTorque = Acceleration * moveInput.y;
-        }
 
         foreach(WheelCollider wheel in Wheels)
-            wheel.motorTorque = motorTorque;
+            wheel.brakeTorque = brakeTorque;
+
+        Wheels[2].motorTorque = motorTorque;
+        Wheels[3].motorTorque = motorTorque;
 
         float targetSteerAngle = SteerSpeed * moveInput.x;
         this.currentSteerAngle = Mathf.MoveTowards(this.currentSteerAngle, targetSteerAngle, STEERING_DAMPING * Time.fixedDeltaTime);
         Wheels[0].steerAngle = this.currentSteerAngle;
         Wheels[1].steerAngle = this.currentSteerAngle;
+
+        this.FirePlayerPositionChanged();
     }
 
     void OnMove(InputValue value)
