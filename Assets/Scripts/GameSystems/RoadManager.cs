@@ -144,7 +144,7 @@ public class RoadManager : MonoBehaviour
                 yield return new WaitForSeconds(initialWaitTime);
                 oldRoad.transform.DOShakePosition(warningTime, 1, 10);
                 yield return new WaitForSeconds(warningTime);
-                oldRoad.transform.DOMove(oldRoad.transform.position + (Vector3.down * 20), 1f).OnComplete(() => {
+                oldRoad.transform.DOMove(oldRoad.transform.position + (Vector3.down * 20), 1f).SetEase(Ease.OutSine).OnComplete(() => {
                     if (oldRoad != null)
                         Destroy(oldRoad);
                 });
