@@ -17,7 +17,7 @@ public class CarController : MonoBehaviour
     private float currentSteerAngle = 0f;
     private bool IsOutOfBounds = false;
 
-    private void FirePlayerPositionChanged()
+    private void FirePlayerPositionChanged(float forwardSpeed = 0f)
     {
         if (IsOutOfBounds)
             return;
@@ -35,6 +35,7 @@ public class CarController : MonoBehaviour
             param.PutExtra(ParameterKey.X.ToString(), pos.x);
             param.PutExtra(ParameterKey.Y.ToString(), pos.y);
             param.PutExtra(ParameterKey.Z.ToString(), pos.z);
+            param.PutExtra(ParameterKey.Speed.ToString(), forwardSpeed);
 
             EventBroadcaster.Instance.PostEvent(Notifications.PlayerPositionChanged.ToString(), param);
         }
@@ -80,7 +81,7 @@ public class CarController : MonoBehaviour
         Wheels[0].steerAngle = this.currentSteerAngle;
         Wheels[1].steerAngle = this.currentSteerAngle;
 
-        this.FirePlayerPositionChanged();
+        this.FirePlayerPositionChanged(forwardSpeed);
     }
 
     void OnMove(InputValue value)
