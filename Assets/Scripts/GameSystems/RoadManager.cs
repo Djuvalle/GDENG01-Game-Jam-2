@@ -72,6 +72,7 @@ public class RoadManager : MonoBehaviour
             this.PrevEndObj.transform.rotation,
             RoadContainer.transform
         );
+        newRoad.tag = "Road";
         GameObject endPoint = newRoad.transform.Find(END_POINT).gameObject;
 
         this.PrevEndObj = endPoint;
