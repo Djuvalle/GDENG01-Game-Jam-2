@@ -13,6 +13,7 @@ public class CanvasController : MonoBehaviour
 
     private void Start()
     {
+        this.GameOverMenu.SetActive(false);
         EventBroadcaster.Instance.AddObserver(Notifications.ScoreUpdated.ToString(), (param) =>
         {
             int score = param.GetIntExtra(ParameterKey.Score.ToString(), 0);
@@ -24,6 +25,10 @@ public class CanvasController : MonoBehaviour
             float speed = param.GetFloatExtra(ParameterKey.Speed.ToString(), 0);
             float zRotation = 90 - (speed / MAX_SPEED) * 180;
             SpeedometerTicker.DOLocalRotate(new Vector3(0, 0, zRotation), 0.1f).SetEase(Ease.OutSine);
+        });
+        EventBroadcaster.Instance.AddObserver(Notifications.PlayerDied.ToString(), () =>
+        {
+            this.GameOverMenu.SetActive(true);
         });
     }
     public void OnRetry()
