@@ -7,7 +7,9 @@ public class RoadManager : MonoBehaviour
 {
     private const float MIN_SPAWN_RANGE = 200;
     private const float DESTROY_START_DELAY = 5f;
-    private const float SLOW_DESTROY_TIME = 5;
+    private const float SLOW_DESTROY_TIME = 10f;
+    private const float TIME_REDUCTION_STEP = 0.1f;
+    private const float MIN_SLOW_DESTROY_TIME = 1.5f;
     private const float MAX__SLOW_DESTROY_DIST = 100;
     private const string END_POINT = "EndPoint";
     
@@ -19,6 +21,7 @@ public class RoadManager : MonoBehaviour
     [SerializeField] private GameObject StartingRoad;
     private GameObject PrevEndObj;
     private int CurrentAxisDirection = 0;
+    private int RoadsPassed = 0;
 
     private void PostEventWaypoint(GameObject prevEndObj)
     {
@@ -73,7 +76,7 @@ public class RoadManager : MonoBehaviour
 
         RoadDirection targetDir = RollTargetDirection();
         int idx = Random.Range(0, RoadPrefabs[targetDir].Length);
-        Debug.Log($"Target Dir: {targetDir} Current Axis: {this.CurrentAxisDirection}");
+        //Debug.Log($"Target Dir: {targetDir} Current Axis: {this.CurrentAxisDirection}");
 
         GameObject newRoad = Instantiate(
             RoadPrefabs[targetDir][idx],
@@ -94,8 +97,6 @@ public class RoadManager : MonoBehaviour
 
         this.PrevEndObj = endPoint;
         SpawnedRoadQueue.Enqueue(newRoad);
-
-        // TODO: Broadcast new Road added and add old Road removal
     }
     private void HandlePlayerPositionChanged(Parameters parameters)
     {
@@ -128,13 +129,25 @@ public class RoadManager : MonoBehaviour
                 yield return null;
             } else {
                 Debug.Log("Slow destroy old road");
-                yield return new WaitForSeconds(SLOW_DESTROY_TIME);
+                // TODO: Add destroy indicator here
+                float destroyTime = Mathf.Max(
+                    MIN_SLOW_DESTROY_TIME,
+                    SLOW_DESTROY_TIME - RoadsPassed * TIME_REDUCTION_STEP
+                );
+                Debug.Log($"Waiting time: {destroyTime}");
+                yield return new WaitForSeconds(destroyTime);
             }
-                
             
             if (oldRoad != null)
                 Destroy(oldRoad);
+
+            // TODO: Destroy effect here
         }
+    }
+
+    private void HandleNewRoadEntered()
+    {
+        RoadsPassed++;
     }
 
     private void Start()
@@ -169,6 +182,7 @@ public class RoadManager : MonoBehaviour
         SpawnedRoadQueue.Enqueue(StartingRoad);
         //this.PostEventWaypoint(PrevEndObj);
 
+        EventBroadcaster.Instance.AddObserver(Notifications.NewRoadEntered.ToString(), this.HandleNewRoadEntered);
         EventBroadcaster.Instance.AddObserver(Notifications.PlayerPositionChanged.ToString(), this.HandlePlayerPositionChanged);
         StartCoroutine(HandleRoadDestruction());
     }
