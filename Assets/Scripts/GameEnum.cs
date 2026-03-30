@@ -26,7 +26,7 @@ namespace GameEnum
     }
     public enum SceneEnum
     {
-        Start,
+        StartScene,
         GameScene
     }
 }
