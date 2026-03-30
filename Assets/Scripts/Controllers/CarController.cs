@@ -10,7 +10,8 @@ public class CarController : MonoBehaviour
     [SerializeField] private float BrakeForce = 3000f;
     [SerializeField] private float SteerSpeed = 35;
     [SerializeField] private WheelCollider[] Wheels = new WheelCollider[4]; // Assumption: First two wheels are front wheels
-    
+    [SerializeField] private ParticleSystem CollisionEffect;
+
     private Rigidbody rb;
     private Vector2 moveInput;
     private float currentSteerAngle = 0f;
@@ -85,5 +86,20 @@ public class CarController : MonoBehaviour
     void OnMove(InputValue value)
     {
         this.moveInput = value.Get<Vector2>();
+        //Debug.Log($"Moved: {moveInput.ToString()}");
+    }
+
+    void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.CompareTag("Road"))
+            return;
+    
+        // Get the first point of contact
+        ContactPoint contact = collision.contacts[0];
+        Vector3 pos = contact.point;
+        CollisionEffect.transform.position = pos;
+        CollisionEffect.Emit(30);
+
+        Debug.Log("Hit at: " + pos);
     }
 }
