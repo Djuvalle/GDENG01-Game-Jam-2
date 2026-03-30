@@ -3,7 +3,7 @@ using GameEnum;
 
 public class ScoreManager : MonoBehaviour
 {
-    private const int NEW_ROAD_ENTERED_SCORE = 0;
+    private const int NEW_ROAD_ENTERED_SCORE = 100;
     private const int COIN_COLLECTED_SCORE = 10;
     private int Score = 0;
 
