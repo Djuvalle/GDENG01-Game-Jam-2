@@ -2,6 +2,7 @@ using UnityEngine;
 using GameEnum;
 using System.Collections.Generic;
 using System.Collections;
+using DG.Tweening;
 
 public class RoadManager : MonoBehaviour
 {
@@ -127,6 +128,8 @@ public class RoadManager : MonoBehaviour
             {
                 Debug.Log("Quick destroy old road");
                 yield return null;
+                if (oldRoad != null)
+                    Destroy(oldRoad);
             } else {
                 Debug.Log("Slow destroy old road");
                 // TODO: Add destroy indicator here
@@ -134,14 +137,18 @@ public class RoadManager : MonoBehaviour
                     MIN_SLOW_DESTROY_TIME,
                     SLOW_DESTROY_TIME - RoadsPassed * TIME_REDUCTION_STEP
                 );
-                Debug.Log($"Waiting time: {destroyTime}");
-                yield return new WaitForSeconds(destroyTime);
-            }
-            
-            if (oldRoad != null)
-                Destroy(oldRoad);
 
-            // TODO: Destroy effect here
+                float warningTime = Mathf.Max(MIN_SLOW_DESTROY_TIME, destroyTime * 0.3f);
+                float initialWaitTime = destroyTime - warningTime;
+                Debug.Log($"Waiting time: {destroyTime}");
+                yield return new WaitForSeconds(initialWaitTime);
+                oldRoad.transform.DOShakePosition(warningTime, 1, 10);
+                yield return new WaitForSeconds(warningTime);
+                oldRoad.transform.DOMove(oldRoad.transform.position + (Vector3.down * 20), 1f).OnComplete(() => {
+                    if (oldRoad != null)
+                        Destroy(oldRoad);
+                });
+            }
         }
     }
 
