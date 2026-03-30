@@ -13,6 +13,7 @@ public class RoadManager : MonoBehaviour
     
     private static GameObject RoadContainer;
     private static Dictionary<RoadDirection, GameObject[]> RoadPrefabs = new Dictionary<RoadDirection, GameObject[]>();
+    private static Dictionary<RoadDirection, GameObject[]> ObstaclePrefabs = new Dictionary<RoadDirection, GameObject[]>();
     private static Queue<GameObject> SpawnedRoadQueue = new Queue<GameObject>();
     private static Vector3 PlayerPosition = Vector3.zero;
     [SerializeField] private GameObject StartingRoad;
@@ -29,6 +30,14 @@ public class RoadManager : MonoBehaviour
         param.PutExtra(ParameterKey.Z.ToString(), pos.z);
 
         EventBroadcaster.Instance.PostEvent(Notifications.WaypointAdded.ToString(), param);
+    }
+    private RoadDirection RollObstacleType(RoadDirection roadDirection)
+    {
+        int roll = Random.Range((int) 0, (int) 101);
+        if (roll >= 75)
+            return RoadDirection.General;
+
+        return roadDirection;
     }
     private RoadDirection RollTargetDirection()
     {
@@ -74,6 +83,14 @@ public class RoadManager : MonoBehaviour
         );
         newRoad.tag = "Road";
         GameObject endPoint = newRoad.transform.Find(END_POINT).gameObject;
+
+        RoadDirection obstacleDir = RollObstacleType(targetDir);
+        GameObject newObstacle = Instantiate(
+            ObstaclePrefabs[obstacleDir][Random.Range(0, ObstaclePrefabs[obstacleDir].Length)],
+            newRoad.transform.position,
+            newRoad.transform.rotation,
+            newRoad.transform
+        );
 
         this.PrevEndObj = endPoint;
         SpawnedRoadQueue.Enqueue(newRoad);
@@ -122,15 +139,30 @@ public class RoadManager : MonoBehaviour
 
     private void Start()
     {   
-        const string ROAD_PATH = "Prefabs/Road/";
         RoadContainer = GameObject.Find("RoadContainer");
+
+        const string ROAD_PATH = "Prefabs/Road/";
         RoadPrefabs.Add(RoadDirection.Straight, Resources.LoadAll<GameObject>($"{ROAD_PATH}{RoadDirection.Straight.ToString()}/"));
         RoadPrefabs.Add(RoadDirection.Right, Resources.LoadAll<GameObject>($"{ROAD_PATH}{RoadDirection.Right.ToString()}/"));
         RoadPrefabs.Add(RoadDirection.Left, Resources.LoadAll<GameObject>($"{ROAD_PATH}{RoadDirection.Left.ToString()}/"));
+        
         Debug.Log("Number of Road prefabs found\n" +
             $"Straight: {RoadPrefabs[RoadDirection.Straight].Length}\n" +
             $"Right: {RoadPrefabs[RoadDirection.Right].Length}\n" + 
             $"Left: {RoadPrefabs[RoadDirection.Left].Length}"
+        );
+
+        const string OBSTACLE_PATH = "Prefabs/Obstacle/";
+        ObstaclePrefabs.Add(RoadDirection.General, Resources.LoadAll<GameObject>($"{OBSTACLE_PATH}{RoadDirection.General.ToString()}/"));
+        ObstaclePrefabs.Add(RoadDirection.Straight, Resources.LoadAll<GameObject>($"{OBSTACLE_PATH}{RoadDirection.Straight.ToString()}/"));
+        ObstaclePrefabs.Add(RoadDirection.Right, Resources.LoadAll<GameObject>($"{OBSTACLE_PATH}{RoadDirection.Right.ToString()}/"));
+        ObstaclePrefabs.Add(RoadDirection.Left, Resources.LoadAll<GameObject>($"{OBSTACLE_PATH}{RoadDirection.Left.ToString()}/"));
+        
+        Debug.Log("Number of Obstacle prefabs found\n" +
+            $"General: {ObstaclePrefabs[RoadDirection.General].Length}\n" +
+            $"Straight: {ObstaclePrefabs[RoadDirection.Straight].Length}\n" +
+            $"Right: {ObstaclePrefabs[RoadDirection.Right].Length}\n" + 
+            $"Left: {ObstaclePrefabs[RoadDirection.Left].Length}"
         );
 
         this.PrevEndObj = StartingRoad.transform.Find(END_POINT).gameObject;
