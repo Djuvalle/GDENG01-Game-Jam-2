@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1001 &4716659767034580603
+--- !u!1001 &3927484516569599513
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -10,19 +10,35 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 144950204931293645, guid: 2def9793ea9e1ce47ae32f54e78a6134, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 8
+      value: -4
+      objectReference: {fileID: 0}
+    - target: {fileID: 144950204931293645, guid: 2def9793ea9e1ce47ae32f54e78a6134, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -3.87
       objectReference: {fileID: 0}
     - target: {fileID: 209380050568801601, guid: 2def9793ea9e1ce47ae32f54e78a6134, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 8
+      value: -4
+      objectReference: {fileID: 0}
+    - target: {fileID: 209380050568801601, guid: 2def9793ea9e1ce47ae32f54e78a6134, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -18.869999
       objectReference: {fileID: 0}
     - target: {fileID: 1290422459190440905, guid: 2def9793ea9e1ce47ae32f54e78a6134, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 8
+      value: -4
+      objectReference: {fileID: 0}
+    - target: {fileID: 1290422459190440905, guid: 2def9793ea9e1ce47ae32f54e78a6134, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -15.87
       objectReference: {fileID: 0}
     - target: {fileID: 3034884846381727657, guid: 2def9793ea9e1ce47ae32f54e78a6134, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 8
+      value: -4
+      objectReference: {fileID: 0}
+    - target: {fileID: 3034884846381727657, guid: 2def9793ea9e1ce47ae32f54e78a6134, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -6.87
       objectReference: {fileID: 0}
     - target: {fileID: 3780953728249325055, guid: 2def9793ea9e1ce47ae32f54e78a6134, type: 3}
       propertyPath: m_LocalPosition.x
@@ -30,7 +46,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3780953728249325055, guid: 2def9793ea9e1ce47ae32f54e78a6134, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3780953728249325055, guid: 2def9793ea9e1ce47ae32f54e78a6134, type: 3}
       propertyPath: m_LocalPosition.z
@@ -66,19 +82,31 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5212379330130827527, guid: 2def9793ea9e1ce47ae32f54e78a6134, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 8
+      value: -4
+      objectReference: {fileID: 0}
+    - target: {fileID: 5212379330130827527, guid: 2def9793ea9e1ce47ae32f54e78a6134, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -0.8699999
       objectReference: {fileID: 0}
     - target: {fileID: 5472273824722342588, guid: 2def9793ea9e1ce47ae32f54e78a6134, type: 3}
       propertyPath: m_Name
-      value: StraightCoins Variant
+      value: StraightCoinsRightVariant
       objectReference: {fileID: 0}
     - target: {fileID: 6255205592450140452, guid: 2def9793ea9e1ce47ae32f54e78a6134, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 8
+      value: -4
+      objectReference: {fileID: 0}
+    - target: {fileID: 6255205592450140452, guid: 2def9793ea9e1ce47ae32f54e78a6134, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -9.87
       objectReference: {fileID: 0}
     - target: {fileID: 7144473748676981748, guid: 2def9793ea9e1ce47ae32f54e78a6134, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 8
+      value: -4
+      objectReference: {fileID: 0}
+    - target: {fileID: 7144473748676981748, guid: 2def9793ea9e1ce47ae32f54e78a6134, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -12.87
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
