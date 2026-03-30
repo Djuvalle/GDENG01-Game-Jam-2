@@ -17,8 +17,8 @@ public class RoadManager : MonoBehaviour
     private static GameObject RoadContainer;
     private Dictionary<RoadDirection, GameObject[]> RoadPrefabs = new Dictionary<RoadDirection, GameObject[]>();
     private Dictionary<RoadDirection, GameObject[]> ObstaclePrefabs = new Dictionary<RoadDirection, GameObject[]>();
-    private static Queue<GameObject> SpawnedRoadQueue = new Queue<GameObject>();
-    private static Vector3 PlayerPosition = Vector3.zero;
+    private Queue<GameObject> SpawnedRoadQueue = new Queue<GameObject>();
+    private Vector3 PlayerPosition = Vector3.zero;
     [SerializeField] private GameObject StartingRoad;
     private GameObject PrevEndObj;
     private int CurrentAxisDirection = 0;
