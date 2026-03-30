@@ -24,4 +24,9 @@ namespace GameEnum
         Right,
         Left
     }
+    public enum SceneEnum
+    {
+        Start,
+        GameScene
+    }
 }
