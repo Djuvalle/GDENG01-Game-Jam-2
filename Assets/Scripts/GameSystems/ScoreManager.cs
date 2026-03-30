@@ -10,7 +10,9 @@ public class ScoreManager : MonoBehaviour
     private void UpdateView()
     {
         Debug.Log("Score: " + Score);
-        // TODO: Update the score view here
+        Parameters param = new Parameters();
+        param.PutExtra(ParameterKey.Score.ToString(), Score);
+        EventBroadcaster.Instance.PostEvent(Notifications.ScoreUpdated.ToString(), param);
     }
     private void Start()
     {
