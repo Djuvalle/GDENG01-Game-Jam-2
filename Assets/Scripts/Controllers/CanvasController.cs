@@ -41,7 +41,7 @@ public class CanvasController : MonoBehaviour
     {
         DOTween.KillAll();
         EventBroadcaster.Instance.RemoveAllObservers();
-        SceneManager.LoadScene(SceneEnum.Start.ToString());
+        SceneManager.LoadScene(SceneEnum.StartScene.ToString());
     }
     private void ShowGameOverMenu()
     {
