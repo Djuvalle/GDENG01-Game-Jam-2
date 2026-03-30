@@ -26,13 +26,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6357280725576384562}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.7071068, y: -0, z: -0, w: 0.7071068}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 6471961671167699487}
-  m_LocalEulerAnglesHint: {x: -90, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!198 &3459952273353856224
 ParticleSystem:
   m_ObjectHideFlags: 0
@@ -4904,15 +4904,15 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -8679921383154817045, guid: 840c9ec583a03b64f95b29e3e49148f4, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -7.2807236
+      value: -5.1205797
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 840c9ec583a03b64f95b29e3e49148f4, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.33399892
+      value: 1.0883081
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 840c9ec583a03b64f95b29e3e49148f4, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -4.9093404
+      value: -9.102641
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 840c9ec583a03b64f95b29e3e49148f4, type: 3}
       propertyPath: m_LocalRotation.w
@@ -4944,12 +4944,24 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 840c9ec583a03b64f95b29e3e49148f4, type: 3}
       propertyPath: m_Name
-      value: Coin
+      value: Coin - Copy
       objectReference: {fileID: 0}
     - target: {fileID: 5819433552329100662, guid: 840c9ec583a03b64f95b29e3e49148f4, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
       objectReference: {fileID: 2100000, guid: 3b7ede2040a24f6439b65d1d0fccd989, type: 2}
+    - target: {fileID: 8879528566716807029, guid: 840c9ec583a03b64f95b29e3e49148f4, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8879528566716807029, guid: 840c9ec583a03b64f95b29e3e49148f4, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8879528566716807029, guid: 840c9ec583a03b64f95b29e3e49148f4, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects:
@@ -4963,6 +4975,12 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 840c9ec583a03b64f95b29e3e49148f4, type: 3}
       insertIndex: -1
       addedObject: {fileID: 8477612873257438767}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 840c9ec583a03b64f95b29e3e49148f4, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 154617047591734440}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 840c9ec583a03b64f95b29e3e49148f4, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1903018113968690170}
     - targetCorrespondingSourceObject: {fileID: -1058662763668757417, guid: 840c9ec583a03b64f95b29e3e49148f4, type: 3}
       insertIndex: -1
       addedObject: {fileID: 3727385131946793503}
@@ -5024,6 +5042,40 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CoinController
   CollectEffect: {fileID: 3459952273353856224}
+--- !u!65 &154617047591734440
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5952305655578931365}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.018857729, y: 0.01898748, z: 0.004000001}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &1903018113968690170
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5952305655578931365}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4d22704b0a8c7f74eb7160c21efc279d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CoinController
+  CollectEffect: {fileID: 0}
 --- !u!4 &6471961671167699487 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 840c9ec583a03b64f95b29e3e49148f4, type: 3}
