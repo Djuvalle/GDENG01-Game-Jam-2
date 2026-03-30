@@ -1,4 +1,4 @@
-Game Title: Buckwheat Blitz
+Game Title: DRIVE MAD
 Starting Scene: StartScene
 
 Section: S22C
