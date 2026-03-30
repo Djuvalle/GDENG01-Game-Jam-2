@@ -12,19 +12,17 @@ public class ScoreManager : MonoBehaviour
         Debug.Log("Score: " + Score);
         // TODO: Update the score view here
     }
-    private void HandleNewRoadEntered()
-    {
-        Score += NEW_ROAD_ENTERED_SCORE;
-        UpdateView();
-    }
-    private void HandleCoinCollected()
-    {
-        Score += COIN_COLLECTED_SCORE;
-        UpdateView();
-    }
     private void Start()
     {
-        EventBroadcaster.Instance.AddObserver(Notifications.NewRoadEntered.ToString(), HandleNewRoadEntered);
-        EventBroadcaster.Instance.AddObserver(Notifications.CoinCollected.ToString(), HandleCoinCollected);
+        EventBroadcaster.Instance.AddObserver(Notifications.NewRoadEntered.ToString(), () =>
+        {
+            Score += NEW_ROAD_ENTERED_SCORE;
+            UpdateView();
+        });
+        EventBroadcaster.Instance.AddObserver(Notifications.CoinCollected.ToString(), () =>
+        {
+            Score += COIN_COLLECTED_SCORE;
+            UpdateView();
+        });
     }
 }
