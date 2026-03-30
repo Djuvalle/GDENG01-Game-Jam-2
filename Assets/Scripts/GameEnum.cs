@@ -7,6 +7,7 @@ namespace GameEnum
         WaypointAdded,
         NewRoadEntered,
         CoinCollected,
+        ScoreUpdated,
     }
     public enum ParameterKey
     {
