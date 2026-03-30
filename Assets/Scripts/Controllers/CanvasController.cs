@@ -3,6 +3,7 @@ using GameEnum;
 using UnityEngine;
 using System;
 using DG.Tweening;
+using UnityEngine.SceneManagement;
 
 public class CanvasController : MonoBehaviour
 {
@@ -25,9 +26,17 @@ public class CanvasController : MonoBehaviour
             SpeedometerTicker.DOLocalRotate(new Vector3(0, 0, zRotation), 0.1f).SetEase(Ease.OutSine);
         });
     }
-    private void OnDestroy()
+    public void OnRetry()
     {
-
+        DOTween.KillAll();
+        EventBroadcaster.Instance.RemoveAllObservers();
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+    }
+    public void OnBack()
+    {
+        DOTween.KillAll();
+        EventBroadcaster.Instance.RemoveAllObservers();
+        SceneManager.LoadScene(SceneEnum.Start.ToString());
     }
     private void ShowGameOverMenu()
     {
