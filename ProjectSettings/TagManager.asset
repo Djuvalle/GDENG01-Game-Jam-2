@@ -4,9 +4,6 @@
 TagManager:
   serializedVersion: 3
   tags:
-  - GrabSpawner
-  - Grabbable
-  - Customer
   layers:
   - Default
   - TransparentFX
