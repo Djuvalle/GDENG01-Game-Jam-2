@@ -15,14 +15,15 @@ public class RoadManager : MonoBehaviour
     private const string END_POINT = "EndPoint";
     
     private static GameObject RoadContainer;
-    private static Dictionary<RoadDirection, GameObject[]> RoadPrefabs = new Dictionary<RoadDirection, GameObject[]>();
-    private static Dictionary<RoadDirection, GameObject[]> ObstaclePrefabs = new Dictionary<RoadDirection, GameObject[]>();
+    private Dictionary<RoadDirection, GameObject[]> RoadPrefabs = new Dictionary<RoadDirection, GameObject[]>();
+    private Dictionary<RoadDirection, GameObject[]> ObstaclePrefabs = new Dictionary<RoadDirection, GameObject[]>();
     private static Queue<GameObject> SpawnedRoadQueue = new Queue<GameObject>();
     private static Vector3 PlayerPosition = Vector3.zero;
     [SerializeField] private GameObject StartingRoad;
     private GameObject PrevEndObj;
     private int CurrentAxisDirection = 0;
     private int RoadsPassed = 0;
+    private bool GenerationDebounce = false;
 
     private void PostEventWaypoint(GameObject prevEndObj)
     {
@@ -69,12 +70,13 @@ public class RoadManager : MonoBehaviour
                 return RoadDirection.Straight;
         }
     }
-    private void TryGeneration()
+    private IEnumerator TryGeneration()
     {
         Vector3 diff = PrevEndObj.transform.position - PlayerPosition;
-        if (diff.magnitude > MIN_SPAWN_RANGE)
-            return;
+        if (diff.magnitude > MIN_SPAWN_RANGE || GenerationDebounce)
+            yield break;
 
+        GenerationDebounce = true;
         RoadDirection targetDir = RollTargetDirection();
         int idx = Random.Range(0, RoadPrefabs[targetDir].Length);
         //Debug.Log($"Target Dir: {targetDir} Current Axis: {this.CurrentAxisDirection}");
@@ -86,6 +88,7 @@ public class RoadManager : MonoBehaviour
             RoadContainer.transform
         );
         newRoad.tag = "Road";
+        yield return new WaitUntil(() => newRoad.transform.Find(END_POINT) != null);
         GameObject endPoint = newRoad.transform.Find(END_POINT).gameObject;
 
         RoadDirection obstacleDir = RollObstacleType(targetDir);
@@ -98,6 +101,7 @@ public class RoadManager : MonoBehaviour
 
         this.PrevEndObj = endPoint;
         SpawnedRoadQueue.Enqueue(newRoad);
+        GenerationDebounce = false;
     }
     private void HandlePlayerPositionChanged(Parameters parameters)
     {
@@ -107,7 +111,7 @@ public class RoadManager : MonoBehaviour
         float z = parameters.GetFloatExtra(ParameterKey.Z.ToString(), 0);
 
         PlayerPosition = new Vector3(x, y, z);
-        this.TryGeneration();
+        StartCoroutine(this.TryGeneration());
     }
 
     IEnumerator HandleRoadDestruction()
@@ -121,6 +125,7 @@ public class RoadManager : MonoBehaviour
                 yield return new WaitUntil(() => SpawnedRoadQueue.Count > 0);
                 
             GameObject oldRoad = SpawnedRoadQueue.Dequeue();
+            yield return new WaitUntil(() => oldRoad.transform.Find(END_POINT) != null);
             GameObject oldEndPoint = oldRoad.transform.Find(END_POINT).gameObject;
 
             // Additional code here
