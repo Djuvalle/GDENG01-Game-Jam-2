@@ -18,6 +18,7 @@ public class CoinController : MonoBehaviour
             return;
 
         IsCollected = true;
+        transform.Find("Coin.tris").gameObject.SetActive(false);
         CollectEffect.Emit(1);
         EventBroadcaster.Instance.PostEvent(Notifications.CoinCollected.ToString());
         StartCoroutine(DestroyAfterEffect());
