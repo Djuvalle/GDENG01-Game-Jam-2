@@ -21,8 +21,10 @@ public class CameraController : MonoBehaviour
 
     private void LateUpdate()
     {
-        yaw += mouseInput.x * sensitivity * Time.deltaTime;
-        pitch -= mouseInput.y * sensitivity * Time.deltaTime;
+        //yaw += mouseInput.x * sensitivity * Time.deltaTime;
+        //pitch -= mouseInput.y * sensitivity * Time.deltaTime;
+        yaw = transform.eulerAngles.y;
+        pitch = 30f;
         pitch = Mathf.Clamp(pitch, -30f, 60f); // clamp for better vehicle viewing
         
         Quaternion targetRotation = Quaternion.Euler(pitch, yaw, 0f);
