@@ -85,6 +85,5 @@ public class CarController : MonoBehaviour
     void OnMove(InputValue value)
     {
         this.moveInput = value.Get<Vector2>();
-        Debug.Log($"Moved: {moveInput.ToString()}");
     }
 }
