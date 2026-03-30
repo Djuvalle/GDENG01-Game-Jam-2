@@ -16,6 +16,7 @@ namespace GameEnum
     }
     public enum RoadDirection
     {
+        General,
         Straight,
         Right,
         Left
