@@ -14,6 +14,8 @@ namespace GameEnum
         X,
         Y,
         Z,
+        Score,
+        Speed
     }
     public enum RoadDirection
     {
