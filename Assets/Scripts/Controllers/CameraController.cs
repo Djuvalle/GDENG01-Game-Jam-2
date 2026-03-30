@@ -15,8 +15,8 @@ public class CameraController : MonoBehaviour
 
     private void Start()
     {
-        Cursor.lockState = CursorLockMode.Locked;
-        Cursor.visible = false;
+        //Cursor.lockState = CursorLockMode.Locked;
+        //Cursor.visible = false;
         
         yaw = transform.eulerAngles.y;
         Player = GameObject.FindGameObjectWithTag("Player");
