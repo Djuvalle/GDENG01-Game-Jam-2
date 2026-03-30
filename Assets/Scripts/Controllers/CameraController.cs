@@ -19,7 +19,7 @@ public class CameraController : MonoBehaviour
         yaw = transform.eulerAngles.y;
     }
 
-    private void LateUpdate()
+    private void FixedUpdate()
     {
         //yaw += mouseInput.x * sensitivity * Time.deltaTime;
         //pitch -= mouseInput.y * sensitivity * Time.deltaTime;
