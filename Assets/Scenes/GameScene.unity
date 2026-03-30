@@ -908,6 +908,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CanvasController
   ScoreText: {fileID: 1150579177}
+  ScoreTextFinal: {fileID: 1747047651}
   SpeedometerTicker: {fileID: 1565051397}
   GameOverMenu: {fileID: 363873799}
 --- !u!1 &363873799

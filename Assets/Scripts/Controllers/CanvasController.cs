@@ -8,6 +8,7 @@ using UnityEngine.SceneManagement;
 public class CanvasController : MonoBehaviour
 {
     [SerializeField] private TextMeshProUGUI ScoreText;
+    [SerializeField] private TextMeshProUGUI ScoreTextFinal;
     [SerializeField] private RectTransform SpeedometerTicker;
     [SerializeField] private GameObject GameOverMenu;
 
@@ -18,6 +19,7 @@ public class CanvasController : MonoBehaviour
         {
             int score = param.GetIntExtra(ParameterKey.Score.ToString(), 0);
             ScoreText.text = $"Score: {score:000,000,000}";
+            ScoreTextFinal.text = $"Final Score:\n{score:000,000,000}";
         });
         EventBroadcaster.Instance.AddObserver(Notifications.PlayerPositionChanged.ToString(), (param) =>
         {
