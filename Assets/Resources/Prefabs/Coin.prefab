@@ -50,7 +50,7 @@ ParticleSystem:
   emitterVelocityMode: 1
   looping: 0
   prewarm: 0
-  playOnAwake: 1
+  playOnAwake: 0
   useUnscaledTime: 0
   autoRandomSeed: 1
   startDelay:
@@ -4904,15 +4904,15 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -8679921383154817045, guid: 840c9ec583a03b64f95b29e3e49148f4, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -13.637716
+      value: -7.2807236
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 840c9ec583a03b64f95b29e3e49148f4, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.0000002452851
+      value: 0.33399892
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 840c9ec583a03b64f95b29e3e49148f4, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -4.4999723
+      value: -4.9093404
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 840c9ec583a03b64f95b29e3e49148f4, type: 3}
       propertyPath: m_LocalRotation.w
@@ -4984,6 +4984,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4d22704b0a8c7f74eb7160c21efc279d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CoinController
+  CollectEffect: {fileID: 0}
 --- !u!1 &5952305655578931365 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 840c9ec583a03b64f95b29e3e49148f4, type: 3}
@@ -5022,6 +5023,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4d22704b0a8c7f74eb7160c21efc279d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CoinController
+  CollectEffect: {fileID: 3459952273353856224}
 --- !u!4 &6471961671167699487 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 840c9ec583a03b64f95b29e3e49148f4, type: 3}
