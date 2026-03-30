@@ -4,7 +4,9 @@ namespace GameEnum
     {
         PlayerPositionChanged,
         PlayerDied,
-        WaypointAdded
+        WaypointAdded,
+        NewRoadEntered,
+        CoinCollected,
     }
     public enum ParameterKey
     {
